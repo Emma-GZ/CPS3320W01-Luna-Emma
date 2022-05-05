@@ -9,8 +9,13 @@ Purpose: Perform Image features extraction; Judgement 3 kinds of similarities be
 3. Feature similarity: Determines whether the features are matching
 
 Output: Print “T” or “F” for above similarity in each level. The interpretation of content we will print show in below rows:
+
 Output;	Pixel-level;	Global visual;	Feature matching
+
 ① TTT:	Similar in Pixel-level;	Similar in Global visual;	Similar in Feature matching;
+
 ② FTT:	Dissimilar in Pixel-level;	Similar in Global visual;	Similar in Feature matching;
+
 ③ FFT:	Dissimilar in Pixel-level;	Dissimilar in Global visual;	Similar in Feature matching;
+
 ④ FFF:	Dissimilar in Pixel-level;	Dissimilar in Global visual;	Dissimilar in Feature matching;
