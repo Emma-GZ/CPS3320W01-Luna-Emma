@@ -26,21 +26,6 @@ def get_img(path):
 
     return img
 
-
-def get_histogram(img):
-    # used in 'normalize_exposure' function
-    """
-    Get a histogram of the target image. For a grayscale image in 8-bit,
-    so the histogram is a 256 units vector that represents the pixels in the image
-    and all values sum to 1.
-    """
-    hei, wid = img.shape  # get height and width of the target image
-    hist = [0.0] * 256  # create a list with 256 vacancy
-    for i in range(hei):
-        for j in range(wid):
-            hist[img[i, j]] += 1
-    return np.array(hist) / (hei * wid)
-
 def pixel_sim(path_a, path_b):
     """
   Measure the pixel-level similarity between two images
@@ -49,7 +34,7 @@ def pixel_sim(path_a, path_b):
     percentage% that measures structural similarity between the input images
   """
     img_1 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test4.jpg')
-    img_2 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test4.jpg')
+    img_2 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test.jpg')
     return ( 1-np.sum(np.absolute(img_1 - img_2)) / (height * width) / 255)*100
 
 
