@@ -1,10 +1,7 @@
 # without normalization of exposure
-import warnings
 from skimage.transform import resize
 from imageio import imread
 import numpy as np
-
-warnings.filterwarnings('ignore')  # ignore warnings
 
 # specify size of image to adjust
 height = 2 ** 10
@@ -20,13 +17,12 @@ def get_img(path):
     # resize function resize image to a soecific size; the type of returned numbers is float
     img = resize(img, (height, width), anti_aliasing=True, preserve_range=True)
 
+    #print(img)
     return img
 
 if __name__ == '__main__':
-    img_1 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test3.jpg')
-    img_2 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test3_c.jpg')
+    img_1 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test.jpg')
+    img_2 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test4.jpg')
     pixel_sim=(1 - np.sum(np.absolute(img_1 - img_2)) / (height * width) / 255) * 100
+    # For a grayscale image in 8-bit, so [0, 255] is the range of their difference.
     print(str(pixel_sim) + "%")
-
-
-# 【Reference】https://gist.github.com/duhaime/211365edaddf7ff89c0a36d9f3f7956c
