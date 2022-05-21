@@ -14,7 +14,7 @@ def get_img(path):
     # imread function converts an image to a 2d grayscale array
     img = imread(path, as_gray=True).astype(int)
 
-    # resize function resize image to a soecific size; the type of returned numbers is float
+    # resize function resize image to a specific size; the type of returned numbers is float
     img = resize(img, (height, width), anti_aliasing=True, preserve_range=True)
 
     #print(img)
