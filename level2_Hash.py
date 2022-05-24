@@ -1,51 +1,8 @@
-# 利用python实现多种方法来实现图像识别
-# 缩略图的相似度在0.7+；风格颜色相似的在0.6~0.7
+# Global Similar (Level2): Hash- Perceptual image hashing
+
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
 from PIL import Image
-
-
-# 最简单的以灰度直方图作为相似比较的实现
-def classify_gray_hist(image1, image2, size=(256, 256)):
-    # 先计算直方图
-    # 几个参数必须用方括号括起来
-    # 这里直接用灰度图计算直方图，所以是使用第一个通道，
-    # 也可以进行通道分离后，得到多个通道的直方图
-    # bins 取为16
-    image1 = cv2.resize(image1, size)
-    image2 = cv2.resize(image2, size)
-    hist1 = cv2.calcHist([image1], [0], None, [256], [0.0, 255.0])
-    hist2 = cv2.calcHist([image2], [0], None, [256], [0.0, 255.0])
-    # 可以比较下直方图
-    plt.plot(range(256), hist1, 'r')
-    plt.plot(range(256), hist2, 'b')
-    plt.show()
-    # 计算直方图的重合度
-    degree = 0
-    for i in range(len(hist1)):
-        if hist1[i] != hist2[i]:
-            degree = degree + (1 - abs(hist1[i] - hist2[i]) / max(hist1[i], hist2[i]))
-        else:
-            degree = degree + 1
-    degree = degree / len(hist1)
-    return degree
-
-
-# 计算单通道的直方图的相似值
-def calculate(image1, image2):
-    hist1 = cv2.calcHist([image1], [0], None, [256], [0.0, 255.0])
-    hist2 = cv2.calcHist([image2], [0], None, [256], [0.0, 255.0])
-    # 计算直方图的重合度
-    degree = 0
-    for i in range(len(hist1)):
-        if hist1[i] != hist2[i]:
-            degree = degree + (1 - abs(hist1[i] - hist2[i]) / max(hist1[i], hist2[i]))
-        else:
-            degree = degree + 1
-    degree = degree / len(hist1)
-    return degree
-
 
 # 平均哈希算法计算
 def classify_aHash(image1, image2):
@@ -120,21 +77,18 @@ def Hamming_distance(hash1, hash2):
 
 
 if __name__ == '__main__':
-    add1='D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test.jpg'
-    add2='D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test4_c.jpg'
+    add1='D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test2.jpg'
+    add2='D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test3.jpg'
     img1 = cv2.imread(add1)
-    cv2.imshow('img1', img1)
     img2 = cv2.imread(add2)
-    cv2.imshow('img2', img2)
-    degree1 = classify_gray_hist(img1, img2)
-    degree2 = classify_aHash(img1,img2)
-    degree3 = classify_pHash(img1,img2)
-    degree4 = classify_dHash(add1, add2)
-    print(degree1)
-    print(degree2)
-    print(degree3)
-    print(degree4)
-    cv2.waitKey(0)
-# 【Reference】
-# https://blog.csdn.net/feimengjuan/article/details/51279629
+    
+    degree1 = classify_aHash(img1,img2); print(degree1)
+    degree2 = classify_pHash(img1,img2); print(degree2)
+    degree3 = classify_dHash(add1, add2); print(degree3)
+
+    #cv2.waitKey(0)
+
+
+# 【Code Reference】
+# 【aHash & pHash】https://blog.csdn.net/feimengjuan/article/details/51279629
 # 【dHash】https://blog.csdn.net/qq_43650934/article/details/108026810
