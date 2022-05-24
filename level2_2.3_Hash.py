@@ -1,10 +1,13 @@
 # Global Similar (Level2): Hash- Perceptual image hashing
-
+# [Algorithms Reference].(https://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html).
+# Code Reference:
+# [aHash & pHash].(https://blog.csdn.net/feimengjuan/article/details/51279629).
+# [dHash].(https://blog.csdn.net/qq_43650934/article/details/108026810).
 import cv2
 import numpy as np
 from PIL import Image
 
-# 平均哈希算法计算
+# Average Hash
 def classify_aHash(image1, image2):
     image1 = cv2.resize(image1, (8, 8))
     image2 = cv2.resize(image2, (8, 8))
@@ -14,32 +17,32 @@ def classify_aHash(image1, image2):
     hash2 = getHash(gray2)
     return Hamming_distance(hash1, hash2)
 
-# 感知哈希算法(pHash)
+# Perceptual Hash (pHash)
 def classify_pHash(image1, image2):
     image1 = cv2.resize(image1, (32, 32))
     image2 = cv2.resize(image2, (32, 32))
     gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
     gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
-    # 将灰度图转为浮点型，再进行dct变换
+    # Convert the grayscale image to floating point, and then perform dct transformation
     dct1 = cv2.dct(np.float32(gray1))
     dct2 = cv2.dct(np.float32(gray2))
-    # 取左上角的8*8，这些代表图片的最低频率
-    # 这个操作等价于c++中利用opencv实现的掩码操作
-    # 在python中进行掩码操作，可以直接这样取出图像矩阵的某一部分
+    # Take the 8*8 in the upper left corner, these represent the lowest frequency of the picture
+    # This operation is equivalent to the mask operation implemented by opencv in C++
+    # Perform mask operation in python, you can directly take out a part of the image matrix like this
     dct1_roi = dct1[0:8, 0:8]
     dct2_roi = dct2[0:8, 0:8]
     hash1 = getHash(dct1_roi)
     hash2 = getHash(dct2_roi)
     return Hamming_distance(hash1, hash2)
 
-# dHash算法
+# Dynamic Hash
 def classify_dHash(add1, add2):
     hash1 = Get_dhash(add1)
     hash2 = Get_dhash(add2)
 
     return Hamming_distance(hash1, hash2)
 
-# 输入灰度图，返回hash
+# input greyscale image，return hash (ahash and phash)
 def getHash(image):
     avreage = np.mean(image)
     hash = []
@@ -51,11 +54,12 @@ def getHash(image):
                 hash.append(0)
     return hash
 
+# input greyscale image，return dhash
 def Get_dhash(img):
     hash = ''
     image = Image.open(img)
-    image = np.array(image.resize((9, 8), Image.ANTIALIAS).convert('L'), 'f')  # 9*8缩放，'f'表示整个数组都是float32类型
-    # 该遍历方法正好是234个像素
+    image = np.array(image.resize((9, 8), Image.ANTIALIAS).convert('L'), 'f')  # 9*8 resize，'f' means float32
+    # traversing 234 pixels
     for i in range(8):
         for j in range(8):
             if image[i, j] > image[i, j + 1]:
@@ -63,11 +67,11 @@ def Get_dhash(img):
             else:
                 hash += '0'
     #print(hash)
-    hash = ''.join(map(lambda x: '%x' % int(hash[x: x + 4], 2), range(0, 64, 4)))  # %x：转换无符号十六进制
+    hash = ''.join(map(lambda x: '%x' % int(hash[x: x + 4], 2), range(0, 64, 4)))  # %x：Convert unsigned hexadecimal
     return hash
 
 
-# 计算汉明距离
+# Calculate the Hamming distance
 def Hamming_distance(hash1, hash2):
     num = 0
     for index in range(len(hash1)):
@@ -87,8 +91,3 @@ if __name__ == '__main__':
     degree3 = classify_dHash(add1, add2); print(degree3)
 
     #cv2.waitKey(0)
-
-
-# 【Code Reference】
-# 【aHash & pHash】https://blog.csdn.net/feimengjuan/article/details/51279629
-# 【dHash】https://blog.csdn.net/qq_43650934/article/details/108026810
