@@ -21,8 +21,8 @@ def get_img(path):
     return img
 
 if __name__ == '__main__':
-    img_1 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test.jpg')
-    img_2 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test4.jpg')
+    img_1 = get_img('image1.jpg')
+    img_2 = get_img('image2.jpg')
     pixel_sim=(1 - np.sum(np.absolute(img_1 - img_2)) / (height * width) / 255) * 100
     # For a grayscale image in 8-bit, so [0, 255] is the range of their difference.
     print(str(pixel_sim) + "%")
