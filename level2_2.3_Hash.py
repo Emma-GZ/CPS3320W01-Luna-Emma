@@ -81,8 +81,8 @@ def Hamming_distance(hash1, hash2):
 
 
 if __name__ == '__main__':
-    add1='D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test2.jpg'
-    add2='D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test3.jpg'
+    add1='path{image1.jpg}'
+    add2='path{image2.jpg}'
     img1 = cv2.imread(add1)
     img2 = cv2.imread(add2)
     
