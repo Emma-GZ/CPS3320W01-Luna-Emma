@@ -5,8 +5,8 @@ from matplotlib import pyplot as plt
 from PIL import Image
 
 # input
-imgname_01 = 'D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\mouse3.jpg'
-imgname_02 = 'D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\mouse3.jpg'
+imgname_01 = 'path{image1.jpg}'
+imgname_02 = 'path{image2.jpg}'
 
 #creat a SIFT object
 sift = cv2.xfeatures2d.SIFT_create()
