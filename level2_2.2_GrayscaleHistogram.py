@@ -72,8 +72,8 @@ def pixel_sim(path_a, path_b):
   @returns:
     percentage% that measures structural similarity between the input images
   """
-    img_1 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test2.jpg')
-    img_2 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test2_c.jpg')
+    img_1 = get_img('path{image1.jpg}')
+    img_2 = get_img('path{image2.jpg}')
     return 1-np.sum(np.absolute(img_1 - img_2)) / (height * width) / 255
 
 if __name__ == '__main__':
