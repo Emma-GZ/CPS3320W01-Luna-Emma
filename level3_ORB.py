@@ -2,8 +2,8 @@
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
-imgname_01 = 'D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\mouse3.jpg'
-imgname_02 = 'D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\mouse3.jpg'
+imgname_01 = 'path{image1.jpg}'
+imgname_02 = 'path{image2.jpg}'
 
 # creat an ORB object
 orb = cv2.ORB_create()
