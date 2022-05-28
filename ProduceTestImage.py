@@ -79,8 +79,8 @@ def show_img(image):
 
 
 def main():
-    data_img_name = 'mouse4.jpg'
-    output_path = "D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\"
+    data_img_name = 'path{image.jpg}'
+    output_path = "path{output}"
     data_path = path.join(output_path, data_img_name)
 
     img = cv.imread(data_path)
