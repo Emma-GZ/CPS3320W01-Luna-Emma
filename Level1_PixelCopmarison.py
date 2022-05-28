@@ -18,8 +18,8 @@ def get_img(path):
     return img
 
 if __name__ == '__main__':
-    img_1 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test.jpg')
-    img_2 = get_img('D:\\aa.WKU\\WKU Course\\CPS3320-W01 PYTHON PROGRAMMING\\project\\photo\\test.jpg')
+    img_1 = get_img('image1.jpg')
+    img_2 = get_img('image2.jpg')
 
 if img_1.shape==img_2.shape:
     for i in range(img_1.shape[0]):
